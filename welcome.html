@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Burger House</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Lilita+One&display=swap" rel="stylesheet">
+    <style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #FFF9EA;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden;
+    }
+    .center-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .title {
+        font-family: 'Lilita One', cursive;
+        color: #FF6B35;
+        text-shadow: 3px 3px 0px rgba(0,0,0,0.1);
+        opacity: 0;
+        transform: scale(0.5);
+        animation: popWelcome 0.8s ease-out forwards;
+        animation-delay: 4.2s;
+    }
+    .subtitle {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeUp 0.8s ease-out forwards;
+        animation-delay: 4.5s;
+    }
+    .order-btn {
+        opacity: 0;
+        transform: scale(0.8);
+        animation: popIn 0.6s ease-out forwards;
+        animation-delay: 4.8s;
+    }
+    .burger-scene {
+        position: relative;
+        height: 400px;
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .table {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background: linear-gradient(to right, #8B4513, #A0522D, #8B4513);
+        border-radius: 5px 5px 0 0;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        z-index: 1;
+    }
+    .table::after {
+        content: '';
+        position: absolute;
+        top: 5px;
+        left: 10%;
+        right: 10%;
+        height: 10px;
+        background: rgba(0,0,0,0.1);
+        border-radius: 50%;
+        filter: blur(5px);
+    }
+    .burger-part {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 280px;
+        opacity: 0;
+    }
+    .bun-bottom {
+        bottom: 40px;
+        z-index: 10;
+        animation: dropAndBounce 0.8s ease-out forwards;
+    }
+    .patty {
+        bottom: 40px;
+        z-index: 20;
+        animation: dropAndBounce 0.8s ease-out forwards;
+        animation-delay: 0.6s;
+    }
+    .cheese {
+        bottom: 40px;
+        z-index: 30;
+        animation: dropAndBounce 0.8s ease-out forwards;
+        animation-delay: 1.2s;
+    }
+    .tomato {
+        bottom: 40px;
+        z-index: 40;
+        animation: dropAndBounce 0.8s ease-out forwards;
+        animation-delay: 1.8s;
+    }
+    .lettuce {
+        bottom: 40px;
+        z-index: 50;
+        animation: dropAndBounce 0.8s ease-out forwards;
+        animation-delay: 2.4s;
+    }
+    .bun-top {
+        bottom: 40px;
+        z-index: 60;
+        animation: dropAndBounce 0.8s ease-out forwards;
+        animation-delay: 3.0s;
+    }
+    @keyframes dropAndBounce {
+        0% {
+            transform: translateX(-50%) translateY(-300px);
+            opacity: 1;
+        }
+        70% {
+            transform: translateX(-50%) translateY(10px);
+            opacity: 1;
+        }
+        85% {
+            transform: translateX(-50%) translateY(-15px);
+            opacity: 1;
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+    @keyframes popWelcome {
+        0% {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    @keyframes fadeUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @keyframes popIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        50% {
+            transform: scale(1.1);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    .splash {
+        position: absolute;
+        background-color: #FF6B35;
+        border-radius: 50%;
+        opacity: 0;
+        animation: splashEffect 0.5s ease-out forwards;
+    }
+    @keyframes splashEffect {
+        0% {
+            transform: scale(0);
+            opacity: 0.8;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 0;
+        }
+    }
+    .shadow-element {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 40px;
+        width: 220px;
+        height: 20px;
+        background: rgba(0,0,0,0.15);
+        border-radius: 50%;
+        filter: blur(8px);
+        z-index: 5;
+        opacity: 0;
+    }
+    .shadow-bun-bottom {
+        animation: shadowAppear 0.5s ease-out forwards;
+    }
+    .shadow-patty {
+        animation: shadowGrow 0.5s ease-out forwards;
+        animation-delay: 0.6s;
+    }
+    .shadow-cheese {
+        animation: shadowGrow 0.5s ease-out forwards;
+        animation-delay: 1.2s;
+    }
+    .shadow-tomato {
+        animation: shadowGrow 0.5s ease-out forwards;
+        animation-delay: 1.8s;
+    }
+    .shadow-lettuce {
+        animation: shadowGrow 0.5s ease-out forwards;
+        animation-delay: 2.4s;
+    }
+    .shadow-bun-top {
+        animation: shadowGrow 0.5s ease-out forwards;
+        animation-delay: 3.0s;
+    }
+    @keyframes shadowAppear {
+        0% {
+            opacity: 0;
+            transform: translateX(-50%) scale(0.5);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+    }
+    @keyframes shadowGrow {
+        0% {
+            opacity: 0.7;
+            transform: translateX(-50%) scale(1);
+        }
+        50% {
+            opacity: 0.9;
+            transform: translateX(-50%) scale(1.05);
+        }
+        100% {
+            opacity: 1;
+            transform: translateX(-50%) scale(1);
+        }
+    }
+    .welcome-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -40px;
+    }
+    </style>
+</head>
+<body>
+    <div class="center-container">
+        <div class="burger-scene">
+            <!-- Shadows -->
+            <div class="shadow-element shadow-bun-bottom"></div>
+            <div class="shadow-element shadow-patty"></div>
+            <div class="shadow-element shadow-cheese"></div>
+            <div class="shadow-element shadow-tomato"></div>
+            <div class="shadow-element shadow-lettuce"></div>
+            <div class="shadow-element shadow-bun-top"></div>
+            <!-- Burger Parts -->
+            <svg class="burger-part bun-bottom" viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,5 Q140,0 260,5 L270,15 Q280,30 270,40 Q250,55 140,60 Q30,55 10,40 Q0,30 10,15 L20,5" fill="#F8B64C"/>
+                <path d="M20,5 Q140,0 260,5" fill="none" stroke="#E8A73C" stroke-width="2"/>
+                <ellipse cx="90" cy="30" rx="10" ry="5" fill="#E8A73C" opacity="0.5"/>
+                <ellipse cx="190" cy="30" rx="12" ry="6" fill="#E8A73C" opacity="0.5"/>
+            </svg>
+            <svg class="burger-part patty" viewBox="0 0 280 50" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10,10 Q140,0 270,10 L270,40 Q140,50 10,40 L10,10" fill="#8D6E63"/>
+                <path d="M10,10 Q140,0 270,10" fill="none" stroke="#6D4C41" stroke-width="2"/>
+                <path d="M10,40 Q140,50 270,40" fill="none" stroke="#6D4C41" stroke-width="2"/>
+                <ellipse cx="70" cy="25" rx="10" ry="5" fill="#5D4037" opacity="0.5"/>
+                <ellipse cx="170" cy="25" rx="10" ry="5" fill="#5D4037" opacity="0.5"/>
+                <ellipse cx="220" cy="25" rx="10" ry="5" fill="#5D4037" opacity="0.5"/>
+            </svg>
+            <svg class="burger-part cheese" viewBox="0 0 280 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10,5 L270,5 L260,35 L20,35 L10,5" fill="#FFC107"/>
+                <path d="M10,5 L270,5 L260,35 L20,35 L10,5" fill="none" stroke="#E8A73C" stroke-width="1"/>
+                <circle cx="60" cy="20" r="5" fill="#FFD54F"/>
+                <circle cx="160" cy="20" r="5" fill="#FFD54F"/>
+                <circle cx="220" cy="20" r="5" fill="#FFD54F"/>
+            </svg>
+            <svg class="burger-part tomato" viewBox="0 0 280 40" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,5 L260,5 L260,35 L20,35 L20,5" fill="#F44336"/>
+                <path d="M20,5 L260,5 L260,35 L20,35 L20,5" fill="none" stroke="#D32F2F" stroke-width="1"/>
+                <path d="M20,20 L260,20" stroke="#FFCDD2" stroke-width="1" opacity="0.5"/>
+                <circle cx="80" cy="20" r="8" fill="#FFCDD2" opacity="0.3"/>
+                <circle cx="140" cy="20" r="8" fill="#FFCDD2" opacity="0.3"/>
+                <circle cx="200" cy="20" r="8" fill="#FFCDD2" opacity="0.3"/>
+            </svg>
+            <svg class="burger-part lettuce" viewBox="0 0 280 60" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20,10 Q70,40 120,5 Q170,40 220,5 Q270,40 280,20 L280,50 L0,50 L0,20 Q10,40 20,10" fill="#4CAF50"/>
+                <path d="M20,10 Q70,40 120,5 Q170,40 220,5 Q270,40 280,20" fill="none" stroke="#3E8E41" stroke-width="2"/>
+            </svg>
+            <svg class="burger-part bun-top" viewBox="0 0 280 100" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30,80 Q140,20 250,80 L270,70 Q280,40 270,30 Q250,10 140,5 Q30,10 10,30 Q0,40 10,70 L30,80" fill="#F8B64C"/>
+                <path d="M30,80 Q140,20 250,80" fill="none" stroke="#E8A73C" stroke-width="2"/>
+                <ellipse cx="80" cy="40" rx="10" ry="5" fill="#E8A73C" opacity="0.5"/>
+                <ellipse cx="180" cy="45" rx="12" ry="6" fill="#E8A73C" opacity="0.5"/>
+                <circle cx="140" cy="15" r="8" fill="#FFFFFF" opacity="0.2"/>
+                <circle cx="140" cy="15" r="4" fill="#FFFFFF" opacity="0.4"/>
+            </svg>
+        </div>
+        <div class="welcome-content">
+            <h1 class="title text-5xl md:text-6xl text-center mb-4">WELCOME!</h1>
+            <p class="subtitle text-xl text-gray-700 text-center mb-8">Burger paradise awaits you</p>
+            <a href="/menu" class="order-btn bg-red-500 hover:bg-red-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition-all duration-300 hover:scale-105 flex items-center" style="text-decoration:none;display:inline-flex;align-items:center;">
+                <span>ORDER NOW</span>
+                <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <script>
+    // Calculate the height each burger part should stack
+    const calculateStackHeight = () => {
+        const bunBottom = document.querySelector('.bun-bottom');
+        const patty = document.querySelector('.patty');
+        const cheese = document.querySelector('.cheese');
+        const tomato = document.querySelector('.tomato');
+        const lettuce = document.querySelector('.lettuce');
+        const bunTop = document.querySelector('.bun-top');
+        // Initial position is at the table
+        let currentHeight = 40; // table height
+        // Set initial positions
+        setTimeout(() => {
+            // Bottom bun stays at the table
+            // Stack patty on bottom bun after its animation
+            setTimeout(() => {
+                currentHeight += 30;
+                patty.style.bottom = `${currentHeight}px`;
+            }, 800);
+            // Stack cheese on patty after its animation
+            setTimeout(() => {
+                currentHeight += 15;
+                cheese.style.bottom = `${currentHeight}px`;
+            }, 1400);
+            // Stack tomato on cheese after its animation
+            setTimeout(() => {
+                currentHeight += 15;
+                tomato.style.bottom = `${currentHeight}px`;
+            }, 2000);
+            // Stack lettuce on tomato after its animation
+            setTimeout(() => {
+                currentHeight += 20;
+                lettuce.style.bottom = `${currentHeight}px`;
+            }, 2600);
+            // Stack top bun on lettuce after its animation
+            setTimeout(() => {
+                currentHeight += 20;
+                bunTop.style.bottom = `${currentHeight}px`;
+            }, 3200);
+        }, 100);
+    };
+    // Run the stacking animation after the page loads
+    window.addEventListener('load', calculateStackHeight);
+    // Add click effect to the order button
+    document.addEventListener('DOMContentLoaded', () => {
+        const orderBtn = document.querySelector('.order-btn');
+        if (orderBtn) {
+            orderBtn.addEventListener('click', function(e) {
+                // Create splash effect
+                const splash = document.createElement('div');
+                splash.classList.add('splash');
+                // Position the splash at click coordinates
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                splash.style.left = x + 'px';
+                splash.style.top = y + 'px';
+                splash.style.width = '100px';
+                splash.style.height = '100px';
+                this.appendChild(splash);
+                // Remove splash after animation completes
+                setTimeout(() => {
+                    splash.remove();
+                    alert('Your burger order is being prepared!');
+                }, 500);
+            });
+        }
+    });
+    </script>
+</body>
+</html> 
